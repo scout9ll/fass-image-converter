@@ -10,3 +10,7 @@ the practice of FasS and OSS
 - 文件夹再次压缩成ZIP
 - 上传至阿里云函数计算
 - 设置OSS触发器
+
+## 注意
+- 阿里云函数计算中OSS需要引用其wrapper
+  > const oss = require("ali-oss").Wrapper;
