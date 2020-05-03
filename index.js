@@ -33,7 +33,7 @@ module.exports.handler = async function (eventBuf, ctx, callback) {
 const downLoadFile = async (ossObjectKey) => {
   try {
     const fileData = await client.get(ossObjectKey);
-    const tempFile = "/tmp.png";
+    const tempFile = "/tmp/tmp.png";
     // console.log("fileData", fileData);
     fs.writeFileSync(tempFile, fileData.content);
     return tempFile;
@@ -46,7 +46,7 @@ const putImage = async (convertedImageBuffer, fileName) => {
   const start = new Date().getTime();
   try {
     const data = convertedImageBuffer;
-    const destPath = "primitiveImage/" + fileName + ".svg";
+    const destPath = "convertedImage/" + fileName + ".svg";
 
     //object-name可以自定义为文件名（例如file.txt）或目录（例如abc/test/file.txt）的形式，实现将文件上传至当前Bucket或Bucket下的指定目录。
     let result = await client.put(destPath, data);
@@ -58,9 +58,9 @@ const putImage = async (convertedImageBuffer, fileName) => {
   console.log("convert time:", end - start);
 };
 
+// >> local test
 
-// local test 
-// const name = "test/tmp.png";
-// downLoadFile(name).then((res) =>
-//   putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1])
-// );
+// const name = "music/test.jpg";
+// downLoadFile(name)
+//   .then((res) => potrace.potraceImage(res))
+//   .then((res) => putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1]));
