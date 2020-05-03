@@ -1,0 +1,23 @@
+{
+  "name": "faas-oss",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "steve",
+  "license": "ISC",
+  "dependencies": {
+    "ali-oss": "^6.5.1",
+    "sqip": "^1.0.0-alpha.31",
+    "sqip-plugin-blur": "^1.0.0-alpha.22",
+    "sqip-plugin-data-uri": "^1.0.0-alpha.32",
+    "sqip-plugin-pixels": "^1.0.0-alpha.0",
+    "sqip-plugin-primitive": "^1.0.0-alpha.33",
+    "sqip-plugin-svgo": "^1.0.0-alpha.32"
+  },
+  "devDependencies": {
+    "potrace": "^2.1.6"
+  }
+}
