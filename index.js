@@ -1,5 +1,7 @@
 const oss = require("ali-oss");
 const fs = require("fs");
+const Jimp = require("Jimp");
+
 const ossConfig = require("./oss.config");
 const { potrace, SQIP } = require("./imageConverter");
 
@@ -33,9 +35,17 @@ module.exports.handler = async function (eventBuf, ctx, callback) {
 const downLoadFile = async (ossObjectKey) => {
   try {
     const fileData = await client.get(ossObjectKey);
-    const tempFile = "/tmp/tmp.png";
-    // console.log("fileData", fileData);
-    fs.writeFileSync(tempFile, fileData.content);
+    const tempFile = "/tmp/tmp.jpg";
+    console.log("fileData", fileData);
+    const Jimage = await Jimp.read(fileData.content) 
+
+    // img compress 
+    await new Promise((resolve, reject) =>Jimage.quality(1,(err,image)=>{
+      image.write(tempFile,(err,image)=>{
+        resolve(tempFile)
+      })
+    }))
+    // fs.writeFileSync(tempFile, fileData.content);
     return tempFile;
   } catch (e) {
     throw new Error(e);
@@ -60,7 +70,7 @@ const putImage = async (convertedImageBuffer, fileName) => {
 
 // >> local test
 
-// const name = "music/test.jpg";
-// downLoadFile(name)
-//   .then((res) => potrace.potraceImage(res))
-//   .then((res) => putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1]));
+const name = "music/test2.jpg"; //oss key
+downLoadFile(name)
+  .then((res) => potrace.potraceImage(res))
+  .then((res) => putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1]));
