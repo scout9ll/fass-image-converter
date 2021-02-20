@@ -1,6 +1,6 @@
 const oss = require("ali-oss");
 const fs = require("fs");
-const Jimp = require("Jimp");
+const Jimp = require("jimp");
 
 const ossConfig = require("./oss.config");
 const { potrace, SQIP } = require("./imageConverter");
@@ -70,7 +70,7 @@ const putImage = async (convertedImageBuffer, fileName) => {
 
 // >> local test
 
-const name = "music/test2.jpg"; //oss key
-downLoadFile(name)
-  .then((res) => potrace.potraceImage(res))
-  .then((res) => putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1]));
+// const name = "music/test2.jpg"; //oss key
+// downLoadFile(name)
+//   .then((res) => potrace.potraceImage(res))
+//   .then((res) => putImage(res, name.match(/([^/]+)\.[A-Za-z]+$/)[1]));
